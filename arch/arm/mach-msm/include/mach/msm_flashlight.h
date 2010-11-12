@@ -43,9 +43,13 @@ enum flashlight_mode_flags {
 	FL_MODE_TORCH_LED_B,
 	FL_MODE_TORCH_LEVEL_1,
 	FL_MODE_TORCH_LEVEL_2,
+<<<<<<< HEAD
 #ifdef CONFIG_ARCH_MSM_FLASHLIGHT_DEATH_RAY
 	FL_MODE_DEATH_RAY,
 #endif
+=======
+	FL_MODE_DEATH_RAY,
+>>>>>>> 5d133c4... msm: flashlight: Add DEATH_RAY mode
 };
 
 struct flashlight_platform_data {
