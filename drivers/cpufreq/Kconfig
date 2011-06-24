@@ -15,7 +15,7 @@ config CPU_FREQ
 
 if CPU_FREQ
 
-config CPU_FREQ_TABLE4
+config CPU_FREQ_TABLE
 	tristate
 
 config CPU_FREQ_DEBUG
