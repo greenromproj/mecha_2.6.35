@@ -105,13 +105,10 @@ static void flashlight_hw_command(uint8_t addr, uint8_t data)
 
 static void flashlight_turn_off(void)
 {
-<<<<<<< HEAD
 #ifndef CONFIG_ARCH_MSM_FLASHLIGHT_DEATH_RAY
 	if (this_fl_str->mode_status == FL_MODE_OFF)
 		return;
 #endif
-=======
->>>>>>> 5d133c4... msm: flashlight: Add DEATH_RAY mode
 	gpio_direction_output(this_fl_str->gpio_flash, 0);
 	if (this_fl_str->chip_model == AAT1271 || this_fl_str->chip_model == AAT1277)
 		gpio_direction_output(this_fl_str->gpio_torch, 0);
@@ -326,7 +323,6 @@ int aat1271_flashlight_control(int mode)
 		return -EIO;
 	}
 #endif
-#if 0 /* disable this for DEATH_RAY */
 	if (this_fl_str->mode_status == mode) {
 		FLT_INFO_LOG("%s: mode is same: %d\n",
 							FLASHLIGHT_NAME, mode);
@@ -340,7 +336,6 @@ int aat1271_flashlight_control(int mode)
 		else
 			return -EINVAL;
 	}
-#endif
 
 	spin_lock_irqsave(&this_fl_str->spin_lock,
 						this_fl_str->spinlock_flags);
@@ -413,15 +408,9 @@ int aat1271_flashlight_control(int mode)
 		this_fl_str->mode_status = FL_MODE_TORCH_LEVEL_2;
 		this_fl_str->fl_lcdev.brightness = LED_HALF - 1;
 	break;
-<<<<<<< HEAD
 #ifdef CONFIG_ARCH_MSM_FLASHLIGHT_DEATH_RAY
 	case FL_MODE_DEATH_RAY:
 		FLT_INFO_LOG("%s: death ray\n", __func__);
-=======
-
-	case FL_MODE_DEATH_RAY:
-		pr_info("%s: death ray\n", __func__);
->>>>>>> 5d133c4... msm: flashlight: Add DEATH_RAY mode
 		hrtimer_cancel(&this_fl_str->timer);
 		gpio_direction_output(this_fl_str->gpio_flash, 0);
 		udelay(40);
@@ -429,11 +418,7 @@ int aat1271_flashlight_control(int mode)
 		this_fl_str->mode_status = 0;
 		this_fl_str->fl_lcdev.brightness = 3;
 	break;
-<<<<<<< HEAD
 #endif
-=======
-
->>>>>>> 5d133c4... msm: flashlight: Add DEATH_RAY mode
 	default:
 		FLT_ERR_LOG("%s: unknown flash_light flags: %d\n",
 							__func__, mode);
@@ -466,15 +451,10 @@ static void fl_lcdev_brightness_set(struct led_classdev *led_cdev,
 			mode = FL_MODE_TORCH_LED_A;
 		else if (brightness == 2 && fl_str->led_count)
 			mode = FL_MODE_TORCH_LED_B;
-<<<<<<< HEAD
 #ifdef CONFIG_ARCH_MSM_FLASHLIGHT_DEATH_RAY
 		else if (brightness == 3)
 			mode = FL_MODE_DEATH_RAY;
 #endif
-=======
-		else if (brightness == 3)
-			mode = FL_MODE_DEATH_RAY;
->>>>>>> 5d133c4... msm: flashlight: Add DEATH_RAY mode
 		else
 			mode = FL_MODE_TORCH;
 	} else if (brightness > LED_HALF && brightness <= LED_FULL) {
